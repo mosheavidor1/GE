@@ -1,9 +1,6 @@
 package API.Test;
 
-import API.Infra.Properties.ApiConst;
-import API.Infra.Properties.BookingID;
-import API.Infra.Properties.EnumID;
-import API.Infra.Properties.PostAuth;
+import API.Infra.Properties.*;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -38,7 +35,7 @@ public class DeleteRequest implements ApiConst {
                     .uri(new URI(ApiConst.url+EnumID.INSTANCE.getBookingId()))
                     .PUT(HttpRequest.BodyPublishers.ofString(jsonString))
                     .header("Content-Type", "application/json")
-                    .header("Cookie", "token="+ApiConst.token).DELETE()
+                    .header("Cookie", "token="+ AuthID.initializeToken()).DELETE()
                     .build();
 
             // Send the request and get the response

@@ -1,9 +1,6 @@
 package API.Test;
 
-import API.Infra.Properties.ApiConst;
-import API.Infra.Properties.BookingID;
-import API.Infra.Properties.EnumID;
-import API.Infra.Properties.PostAuth;
+import API.Infra.Properties.*;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -24,6 +21,7 @@ import java.net.http.HttpResponse;
             getBooking();
 
 
+
         }
 
         public static void updateBooking(String firstname, String lastname, int totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds) throws Exception {
@@ -31,6 +29,7 @@ import java.net.http.HttpResponse;
 
             HttpResponse<String> postResponse = PostRequest.post();
             BookingID.BookingId bookingId = new BookingID.BookingId(postResponse);
+
 
             // Create the JSON payload for the PUT request
             JSONObject json = new JSONObject();
@@ -50,7 +49,7 @@ import java.net.http.HttpResponse;
                     .uri(new URI(ApiConst.url+EnumID.INSTANCE.getBookingId()))
                     .PUT(HttpRequest.BodyPublishers.ofString(jsonString))
                     .header("Content-Type", "application/json")
-                   .header("Cookie", "token="+ApiConst.token)
+                   .header("Cookie", "token="+AuthID.initializeToken())
 
                     .build();
 
